@@ -12,4 +12,14 @@ func routes(_ app: Application) throws {
     app.get("pokemon") { req async -> String in
         "This is the Pokémon endpoint"
     }
+
+    app.get("hello", ":name") { req async -> String in
+        guard
+            let name  = req.parameters.get("name"),
+            name.count > 1
+        else {
+            return "Not a valid name. Must be longer than one letter"
+        }
+        return "Hello, \(name)"
+    }
 }
